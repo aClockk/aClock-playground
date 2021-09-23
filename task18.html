@@ -27,32 +27,49 @@
     <button id="right-out">右侧出</button>
     <section></section>
     <script>
-        let selection = document.querySelector('section');
-        let leftIn = document.querySelector('#left-in');
-        let rightIn = document.querySelector('#right-in');
-        let leftOut = document.querySelector('#left-out');
-        let rightOut = document.querySelector('#right-out');
-        let content = document.querySelector('input');
-        rightIn.addEventListener('click', () => {
-            let a = document.createElement('a');
-            selection.appendChild(a);
-            a.innerText = content.value;
-        });
-        leftIn.addEventListener('click', () => {
-            let theFirstChild = selection.firstChild;
-            let a = document.createElement('a');
-            selection.insertBefore(a, theFirstChild);
-            a.innerText = content.value;
-        });
-        leftOut.addEventListener('click', () => {
-            selection.removeChild(selection.firstElementChild);
-        });
-        rightOut.addEventListener('click', () => {
-            selection.removeChild(selection.lastElementChild);
-        });
-        selection.addEventListener('click', (e) => {
-            selection.removeChild(e.target);
-        });
+        function leftSide() {
+            let selection = document.querySelector('section');
+            let leftIn = document.querySelector('#left-in');
+            let leftOut = document.querySelector('#left-out');
+            let content = document.querySelector('input');
+            leftIn.addEventListener('click', () => {
+                let theFirstChild = selection.firstChild;
+                let a = document.createElement('a');
+                selection.insertBefore(a, theFirstChild);
+                a.innerText = content.value;
+            });
+            leftOut.addEventListener('click', () => {
+                if (selection.innerHTML) {
+                    selection.removeChild(selection.firstElementChild);
+                }
+            });
+        }
+
+        function rightSide() {
+            let selection = document.querySelector('section');
+            let rightIn = document.querySelector('#right-in');
+            let rightOut = document.querySelector('#right-out');
+            let content = document.querySelector('input');
+            rightIn.addEventListener('click', () => {
+                let a = document.createElement('a');
+                selection.appendChild(a);
+                a.innerText = content.value;
+            });
+            rightOut.addEventListener('click', () => {
+                if (selection.innerHTML) {
+                    selection.removeChild(selection.lastElementChild);
+                }
+            });
+            selection.addEventListener('click', (e) => {
+                selection.removeChild(e.target);
+            });
+        }
+
+        function init() {
+            leftSide();
+            rightSide();
+        }
+        init();
     </script>
 </body>
 
