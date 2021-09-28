@@ -1,0 +1,58 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>IFE JS Task 05</title>
+    <style>
+      .aqi-chart-wrap {
+        height: 550px;
+        position: relative;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="functionCityData">
+      <fieldset id="form-gra-time">
+        <legend>请选择日期粒度：</legend>
+        <label
+          >日<input
+            name="gra-time"
+            value="day"
+            type="radio"
+            checked="checked"
+            v-model="dateClass"
+        /></label>
+        <label
+          >周<input
+            name="gra-time"
+            value="week"
+            type="radio"
+            v-model="dateClass"
+        /></label>
+        <label
+          >月<input
+            name="gra-time"
+            value="month"
+            type="radio"
+            v-model="dateClass"
+        /></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>请选择查看的城市：</legend>
+        <select id="city-select" v-model="city">
+          <option v-for="(item,index) in cityName">{{cityName[index]}}</option>
+        </select>
+      </fieldset>
+
+      <div class="aqi-chart-wrap">
+        <div v-if="dateClass==='day'" v-html="daysChartMaker()"></div>
+        <div v-if="dateClass==='week'" v-html="weeksChartMaker()"></div>
+        <div v-if="dateClass==='month'" v-html="monthsChartMaker()"></div>
+      </div>
+    </div>
+    <script src="task.js"></script>
+  </body>
+</html>
